@@ -107,6 +107,40 @@ fn indeksy2(wektor: &Vec<i32>, element: i32) -> Vec<i32> {
     result
 }
 
+fn shorter_than_4_chars(v: &Vec<String>) -> Vec<String> {
+    let mut result = Vec::new();
+    v.iter()
+        .filter(|x| x.len() < 4)
+        .for_each(|y| result.push(String::from(y)));
+    result
+}
+
+fn does_not_have_a_or_A(v: &Vec<String>) -> Vec<&String> {
+    v.iter()
+        .filter(|x| !x.contains("A") && !x.contains("a"))
+        .collect()
+}
+
+fn does_have_a_number(v: &Vec<String>) -> Vec<&String> {
+    v.iter()
+        .filter(|x| x.chars().any(|c| c.is_digit(10)))
+        .collect()
+}
+
+fn same_vec_but_strings_in_reverse(v: &mut Vec<String>) -> Vec<&String> {
+    v.iter_mut().for_each(|x| {
+        let reversed_string: String = x.chars().rev().collect();
+        *x = reversed_string;
+    });
+    v.iter().collect()
+}
+
+fn filter_strings_with_adjacent_letters(v: &[String]) -> Vec<&String> {
+    v.iter()
+        .filter(|x| x.chars().zip(x.chars().skip(1)).any(|(c1, c2)| c1 == c2))
+        .collect()
+}
+
 fn main() {
     println!("{:?}", powtorki(&[1, 3, 4, 3, 3, 3, 3, 4, 1, 1, 6]));
     println!("{:?}", unikalne(&[1, 3, 4, 3, 3, 5, 3, 4, 1, 1, 6]));
@@ -127,5 +161,51 @@ fn main() {
         (1..=100)
             .filter(|i| i % 3 == 0 && i % 4 != 0)
             .collect::<Vec<_>>()
+    );
+
+    println!(
+        "{:?}",
+        shorter_than_4_chars(&vec![
+            "Krystian".to_string(),
+            "Ube".to_string(),
+            "Kali".to_string(),
+            "Ignacy".to_string()
+        ])
+    );
+    println!(
+        "{:?}",
+        does_not_have_a_or_A(&vec![
+            "Krystian".to_string(),
+            "Ube".to_string(),
+            "Kali".to_string(),
+            "Anna".to_string()
+        ])
+    );
+    println!(
+        "{:?}",
+        does_have_a_number(&vec![
+            "Krystian122".to_string(),
+            "Ube".to_string(),
+            "Kali23".to_string(),
+            "Anna".to_string()
+        ])
+    );
+    println!(
+        "{:?}",
+        same_vec_but_strings_in_reverse(&mut vec![
+            "Krystian".to_string(),
+            "Ube".to_string(),
+            "Kali".to_string(),
+            "Anna".to_string()
+        ])
+    );
+    println!(
+        "{:?}",
+        filter_strings_with_adjacent_letters(&mut vec![
+            "Krystian".to_string(),
+            "Pizza".to_string(),
+            "Kali".to_string(),
+            "Anna".to_string()
+        ])
     );
 }

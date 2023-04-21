@@ -177,6 +177,27 @@ fn na_rzymskie(liczba: u32) -> String{
     result
 }
 
+fn dodaj_pisemnie(a: String, b: String) -> String{
+    let mut result = String::new();
+    let mut carry : i32 = 0;
+    let mut j = b.len()  as i32 -1;
+    for i in (0..a.len()).rev(){
+        let mut num : i32;
+        if j >=0 {
+            num = a.chars().nth(i).unwrap() as i32-'0' + b.chars().nth(j as usize).unwrap() as i32-'0' as i32;
+        }else{
+            num = a.chars().nth(i).unwrap() as i32-'0' as i32;
+        }
+        num = num+carry;
+        carry = num/10;
+        let digit = num%10;
+        if j > 0{
+            j = j-1;
+        }
+        result.push_str(digit.to_string().as_str());
+    }
+    result.chars().rev().collect::<String>()
+}
 
 fn main() {
     let mut seed: u32 = 5;
