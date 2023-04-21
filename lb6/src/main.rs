@@ -17,11 +17,11 @@ fn powtorki(t: &[i32]) -> Vec<i32> {
     ret
 }
 //druga metoda:
-fn repeats(v: &Vec<i32>) -> Vec<&i32> {
+fn powtorki2(v: &Vec<i32>) -> Vec<&i32> {
     let mut result = Vec::new();
     for i in 1..(v.len() - 1) {
-        if (v.get(i).unwrap() == v.get(i - 1).unwrap()
-            || v.get(i).unwrap() == v.get(i + 1).unwrap())
+        if v.get(i).unwrap() == v.get(i - 1).unwrap()
+            || v.get(i).unwrap() == v.get(i + 1).unwrap()
         {
             result.push(v.get(i).unwrap());
         }
@@ -47,7 +47,7 @@ fn unikalne(t: &[i32]) -> Vec<i32> {
     ret
 }
 //2 sposób
-fn unique(v: &Vec<i32>) -> Vec<&i32> {
+fn unikalne2(v: &Vec<i32>) -> Vec<&i32> {
     let mut result = Vec::new();
     for i in 0..v.len() {
         let mut unique_val = true;
@@ -76,7 +76,7 @@ fn zlicz_wiele(s1: &[i32], s2: &[i32]) -> i32 {
     ret
 }
 
-fn unique2(v: &Vec<i32>) -> Vec<&i32> {
+fn unikalne3(v: &Vec<i32>) -> Vec<&i32> {
     let mut result = Vec::new();
     for i in v {
         if zlicz_wiele(v, &vec![*i]) == 1 {
@@ -143,12 +143,13 @@ fn filter_strings_with_adjacent_letters(v: &[String]) -> Vec<&String> {
 
 fn main() {
     println!("{:?}", powtorki(&[1, 3, 4, 3, 3, 3, 3, 4, 1, 1, 6]));
+    println!("{:?}", powtorki2(&vec![1, 3, 4, 3, 3, 3, 3, 4, 1, 1, 6]));
     println!("{:?}", unikalne(&[1, 3, 4, 3, 3, 5, 3, 4, 1, 1, 6]));
+    println!("{:?}", unikalne2(&vec![1, 3, 4, 3, 3, 5, 3, 4, 1, 1, 6]));
+    println!("{:?}", unikalne3(&vec![1, 3, 4, 3, 3, 5, 3, 4, 1, 1, 6]));
     println!("{:?}", zlicz_wiele(&[1, 2, 1, 3], &[1, 2]));
-    println!("{:?}", zlicz_wiele(&[1, 2, 1, 3], &[12]));
-    println!("{:?}", zlicz_wiele(&[1, 2, 1, 3], &[1, 2, 2]));
-    println!("{:?}", zlicz_wiele(&[1, 2, 1, 3], &[1, 2, 2, 1]));
     println!("{:?}", indeksy(&[1, 7, 7, 1, 3, 1, 3, 5, 6, 7], 7));
+    println!("{:?}", indeksy2(&vec![1, 7, 7, 1, 3, 1, 3, 5, 6, 7], 7));
     println!("{:?}", ('a'..='z').collect::<Vec<_>>());
     println!("{:?}", (1..=10).map(|i| i * i).collect::<Vec<_>>());
     println!("{:?}", (1..=10).map(|i| i32::pow(2, i)).collect::<Vec<_>>());
